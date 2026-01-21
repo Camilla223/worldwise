@@ -1,9 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "./PageNav.module.css";
 import Logo from "./Logo";
-import { useAuth } from "../context/FakeAuthContext";
 function PageNav() {
-  const { isAuthenticated, logout } = useAuth();
   return (
     <nav className={styles.nav}>
       <Logo />
