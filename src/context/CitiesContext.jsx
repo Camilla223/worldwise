@@ -51,7 +51,6 @@ function CitiesProvider({ children }) {
       dispatch({ type: "loading" });
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/cities`);
-        console.log(import.meta.env.VITE_API_URL);
         const data = await res.json();
         dispatch({ type: "cities/loaded", payload: data });
       } catch {

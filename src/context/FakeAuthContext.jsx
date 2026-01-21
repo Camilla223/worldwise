@@ -12,17 +12,17 @@ function reducer(state, action) {
     case "login":
       return { ...state, user: action.payload, isAuthenticated: true };
     case "logout":
-      return initialState;
+      return { ...state, ...initialState };
     default:
       throw new Error("Unexpeted action");
   }
 }
 
 const FAKE_USER = {
-  name: "Jack",
-  email: "jack@example.com",
+  name: "Camilla",
+  email: "camilla@example.com",
   password: "qwerty",
-  avatar: "https://i.pravatar.cc/100?u=zz",
+  avatar: "https://i.pravatar.cc/100?img=48",
 };
 
 function AuthProvider({ children }) {
@@ -37,7 +37,7 @@ function AuthProvider({ children }) {
   }
 
   function logout() {
-    dispatch({ type: "login" });
+    dispatch({ type: "logout" });
   }
 
   return (

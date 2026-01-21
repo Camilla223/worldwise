@@ -44,10 +44,10 @@ function Form() {
         const data = await res.json();
         if (!data.countryCode)
           throw new Error(
-            "That doen't sseem to be a city, Click somewhere else!😁"
+            "That doen't sseem to be a city, Click somewhere else!😁",
           );
         setCityName(data.city || data.locality || "");
-        setCountry(data.contruyName);
+        setCountry(data.countryName);
         setEmoji(convertToEmoji(data.countryCode));
       } catch (err) {
         setGeocodingError(err.message);
