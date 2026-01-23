@@ -7,6 +7,8 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
+import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import { Icon } from "leaflet";
 import styles from "./Map.module.css";
 import { useEffect, useState } from "react";
 import Button from "./Button";
@@ -53,6 +55,13 @@ function Map() {
           <Marker
             position={[city.position.lat, city.position.lng]}
             key={city.id}
+            icon={
+              new Icon({
+                iconUrl: markerIconPng,
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+              })
+            }
           >
             <Popup>
               <span>{city.emoji}</span>

@@ -1,7 +1,8 @@
 import { createContext, useReducer } from "react";
 import { useEffect, useContext } from "react";
 
-// const BASE_URL = "http://localhost:8000";
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const CitiesContext = createContext();
 //useReducer + contextApi
 function reducer(state, action) {
@@ -50,7 +51,7 @@ function CitiesProvider({ children }) {
     async function fetchCities() {
       dispatch({ type: "loading" });
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/cities`);
+        const res = await fetch(`${BASE_URL}/cities`);
         const data = await res.json();
         dispatch({ type: "cities/loaded", payload: data });
       } catch {
@@ -67,7 +68,7 @@ function CitiesProvider({ children }) {
     if (Number(id) === currentCity.id) return;
     dispatch({ type: "loading" });
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/cities/${id}`);
+      const res = await fetch(`${BASE_URL}/cities/${id}`);
       const data = await res.json();
       dispatch({ type: "city/loaded", payload: data });
     } catch {
@@ -81,7 +82,7 @@ function CitiesProvider({ children }) {
   async function createCity(newCity) {
     dispatch({ type: "loading" });
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/cities`, {
+      const res = await fetch(`${BASE_URL}/cities`, {
         method: "POST",
         body: JSON.stringify(newCity),
         headers: { "Content-type": "application/json" },
@@ -99,7 +100,7 @@ function CitiesProvider({ children }) {
   async function deleteCity(id) {
     dispatch({ type: "loading" });
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/cities/${id}`, {
+      await fetch(`${BASE_URL}/cities/${id}`, {
         method: "DELETE",
       });
       dispatch({ type: "city/deleted", payload: id });
@@ -110,6 +111,9 @@ function CitiesProvider({ children }) {
       });
     }
   }
+
+  if (!cities) return <h1>MIAO</h1>;
+
   return (
     <CitiesContext.Provider
       value={{
